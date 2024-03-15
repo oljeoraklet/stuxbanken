@@ -1,0 +1,42 @@
+@model ReportViewModel
+
+@{
+    ViewBag.Title = "Transaction List";
+}
+
+<h2>Transaction List</h2>
+<a href="@Url.Action("DownloadTransactionsAsJson", new { categoryID = Model.categoryID })"
+    class="btn btn-primary">Download
+    Transactions as JSON</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Transaction ID</th>
+            <th>Booking Date</th>
+            <th>Transaction Date</th>
+            <th>Reference</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model.Transactions)
+        {
+            <tr>
+                <td>@transaction.TransactionID</td>
+                <td>@transaction.BookingDate</td>
+                <td>@transaction.TransactionDate</td>
+                <td>@transaction.Reference</td>
+                <td>@transaction.Amount</td>
+                <td>@transaction.CategoryName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <h3>Totals</h3>
+    <p><strong>Total Expenses:</strong> @Model.TotalExpenses:- kr</p>
+    <p><strong>Total Incomes:</strong> @Model.TotalIncomes:- kr</p>
+</div>

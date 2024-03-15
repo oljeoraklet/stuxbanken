@@ -1,0 +1,10 @@
+@{
+    ViewData["Title"] = "AddCategory";
+}
+
+<h2>Add Category</h2>
+
+<form asp-action="CreateCategory" method="post" id="createCategoryForm">
+    <input type="text" name="CategoryName" placeholder="Namn på kategori">
+    <input type="submit" value="Skapa">
+</form>

@@ -1,0 +1,25 @@
+@model IEnumerable<Category>
+
+@{
+    ViewData["Title"] = "GetTransactions";
+}
+
+<h1>GetTransactions</h1>
+
+<p>
+    <a asp-action="UpdateTransactions">Uppdatera Transaktioner</a>
+    <a asp-action="AddCategory">Skapa en ny kategori</a>
+    <a asp-action="AssignCategories">Ändra kategorier</a>
+</p>
+
+<h2>Vilken rapport vill du ha?</h2>
+<form asp-action="ViewReport" method="POST" id="chosenCategoryReport">
+    <select name="categoryID" id="categoryID">
+        <option value="0">Alla</option>
+        @foreach (var category in Model)
+        {
+            <option value="@category.CategoryID">@category.CategoryName</option>
+        }
+    </select>
+    <button type="submit">Skicka rapport</button>
+</form>

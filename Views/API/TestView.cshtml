@@ -1,0 +1,18 @@
+@model SimpleTestViewModel
+@{
+    Layout = null; // Assuming you don't need a layout for this test
+}
+
+<h2>Test Form</h2>
+<form asp-action="TestAction" method="post">
+    @for (int i = 0; i < 3; i++) // Creating a fixed number of test items
+    {
+        <div>
+            <label>TransactionID: <span>@Html.DisplayFor(m => m.Items[i].TransID)</span></label>
+            @Html.HiddenFor(m => m.Items[i].TransID) // Correctly binds the TransID from the model
+            <label>CategoryName:</label>
+            <input type="text" asp-for="@Model.Items[i].CategoryName" />
+        </div>
+    }
+    <button type="submit">Submit</button>
+</form>

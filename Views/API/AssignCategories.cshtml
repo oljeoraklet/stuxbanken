@@ -1,0 +1,85 @@
+@model TransactionsViewModel
+@{
+    ViewData["Title"] = "GetTransactions";
+    int index = 0;
+}
+
+<h1>GetTransactions</h1>
+
+<p>
+    <a asp-action="UpdateTransactions">Uppdatera Transaktioner</a>
+    <a asp-action="AddCategory">Skapa en ny kategori</a>
+</p>
+<form asp-action="AssignCategories" method="POST" id="categoryForm">
+    <button type="submit">Spara ändringar</button>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    TransactionID
+                </th>
+                <th>
+                    Booking Date
+                </th>
+                <th>
+                    Transaction Date
+                </th>
+                <th>
+                    Ref
+                </th>
+                <th>
+                    Amount
+                <th>
+                    Balande
+                </th>
+                <th>Category</th>
+                <th>New Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var transaction in Model.Transactions)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.TransactionID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.BookingDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.TransactionDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.Reference)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => transaction.Balance)
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <input type="hidden" name="updatedCategories[@index].TransactionID" value="@transaction.TransactionID" />
+                        <select name="updatedCategories[@index].CategoryID" id="newCategory-@transaction.TransactionID">
+                            <option value="0">@transaction.CategoryName</option>
+                            @foreach (var category in Model.Categories)
+                            {
+                                if (category.CategoryName != transaction.CategoryName)
+                                {
+                                    <option value="@category.CategoryID" asp-for="@category.CategoryID">@category.CategoryName</option>
+                                }
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", new { id = transaction.TransactionID })
+                    </td>
+                </tr>
+                index++;
+            }
+        </tbody>
+    </table>
+</form>

@@ -1,0 +1,69 @@
+@model TransactionsViewModel
+
+@{
+    ViewData["Title"] = "GetTransactions";
+}
+
+<h1>GetTransactions</h1>
+
+<p>
+    <a asp-action="UpdateTransactions">Uppdatera Transaktioner</a>
+    <a asp-action="AddCategory">Skapa en ny kategori</a>
+    <a asp-action="AssignCategories">Ändra kategorier</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                TransactionID
+            </th>
+            <th>
+                Booking Date
+            </th>
+            <th>
+                Transaction Date
+            </th>
+            <th>
+                Ref
+            </th>
+            <th>
+                Amount
+            <th>
+                Balande
+            </th>
+            <th>Category</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model.Transactions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => transaction.TransactionID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => transaction.BookingDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => transaction.TransactionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => transaction.Reference)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => transaction.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => transaction.Balance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => transaction.CategoryName)
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = transaction.TransactionID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
